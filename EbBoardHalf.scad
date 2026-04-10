@@ -74,7 +74,7 @@ module EbBoardHalf()
                         $keyhole_boss_h ] );
                 translate( [ $wall_t, $wall_t, -1 ] )
                     cube( [ keyhole_box_w,
-                            keyhole_box_d,
+                            keyhole_box_d + $wall_t,
                             $keyhole_boss_h ] );
             }
         }
