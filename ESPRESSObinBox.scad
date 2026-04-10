@@ -84,6 +84,13 @@ $diskHole1_y      =  5;                         // y coordinate of the bottom-le
 
 $fanHolder_t      = 1.5;                        // thickness of the braces that constitute the fan holder
 
+$keyhole_headR    = 4;                           // radius of the large end (screw head passes through)
+$keyhole_shaftR   = 2;                           // radius of the narrow slot (screw shaft)
+$keyhole_slotL    = 8;                           // length of the sliding slot
+$keyhole_dx       = 80;                          // distance between the two keyholes along X
+$keyhole_boss_h   = 4;                           // height of the reinforcement box (enough for screw head)
+$keyhole_boss_clearance = 3;                     // clearance inside the box around the keyhole shape
+
 $oledPcb_w        = 27;                          // OLED module PCB width (0.96" SSD1306)
 $oledPcb_d        = 27;                          // OLED module PCB depth
 $oledPcb_t        = 1.2;                         // OLED module PCB thickness

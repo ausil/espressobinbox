@@ -43,6 +43,40 @@ module EbBoardHalf()
                 }
 
             }
+
+            // Keyhole mounting slots in bottom plate
+            for( kx = [ $box_wi/2 - $keyhole_dx/2, $box_wi/2 + $keyhole_dx/2 ] ) {
+                translate( [ kx, $box_di/2, -2*$wall_t ] )
+                linear_extrude( 3*$wall_t ) {
+                    // large hole for screw head
+                    circle( r = $keyhole_headR );
+                    // narrow slot to slide onto
+                    translate( [ 0, -$keyhole_slotL ] ) {
+                        circle( r = $keyhole_shaftR );
+                        // connect with hull-like shape
+                        translate( [ -$keyhole_shaftR, 0 ] )
+                            square( [ 2*$keyhole_shaftR, $keyhole_slotL ] );
+                    }
+                }
+            }
+        }
+
+        // Keyhole reinforcement boxes -- rectangular enclosure around each keyhole
+        keyhole_box_w = 2 * ($keyhole_headR + $keyhole_boss_clearance);
+        keyhole_box_d = $keyhole_headR + $keyhole_slotL + $keyhole_shaftR + 2 * $keyhole_boss_clearance;
+        for( kx = [ $box_wi/2 - $keyhole_dx/2, $box_wi/2 + $keyhole_dx/2 ] ) {
+            translate( [ kx - keyhole_box_w/2 - $wall_t,
+                         $box_di/2 - ($keyhole_slotL + $keyhole_shaftR + $keyhole_boss_clearance) - $wall_t,
+                         0 ] )
+            difference() {
+                cube( [ keyhole_box_w + 2*$wall_t,
+                        keyhole_box_d + 2*$wall_t,
+                        $keyhole_boss_h ] );
+                translate( [ $wall_t, $wall_t, -1 ] )
+                    cube( [ keyhole_box_w,
+                            keyhole_box_d,
+                            $keyhole_boss_h ] );
+            }
         }
 
         // standoffs for the board
