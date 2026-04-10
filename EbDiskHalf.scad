@@ -90,6 +90,14 @@ module EbDiskHalf()
                 }
             }
 
+            // OLED display window cutout through top plate
+            translate( [ $oledWindow_x,
+                         $box_di/2 + $oledWindow_y - $oledWindow_d/2,
+                         $box_hi - $wall_t ] )
+            linear_extrude( 3 * $wall_t ) {
+                square( [ $oledWindow_w, $oledWindow_d ] );
+            }
+
             // ventilation -- fan side
 
             translate( [ $box_wi - $wall_t,  $box_di/2 - $ventilation_w/2, $box_hi / 2 - $ventilation_h / 2 ] )
@@ -172,6 +180,31 @@ module EbDiskHalf()
                     holder_h  = $box_hi / 2 - $fan_h / 2 - $slidingFit_d + $fan_h / 4,
                     offset_z  = $box_hi / 2 - $fan_h / 2 - $slidingFit_d,
                     thickness = $fanHolder_t );
+        }
+
+        // OLED PCB support ledge -- frame around the window on the inside of the top plate
+        translate( [ $oledWindow_x - ($oledPcb_w - $oledWindow_w) / 2,
+                     $box_di/2 + $oledWindow_y - $oledPcb_d/2,
+                     $box_hi - $oledLedge_h ] )
+        linear_extrude( $oledLedge_h ) {
+            difference() {
+                square( [ $oledPcb_w, $oledPcb_d ] );
+                translate( [ ($oledPcb_w - $oledWindow_w) / 2,
+                             ($oledPcb_d - $oledWindow_d) / 2 ] ) {
+                    square( [ $oledWindow_w, $oledWindow_d ] );
+                }
+            }
+        }
+
+        // OLED corner alignment posts -- extend below ledge to guide PCB into place
+        for( cx = [ $oledWindow_x - ($oledPcb_w - $oledWindow_w) / 2 + $oledPost_r + $slidingFit_d,
+                    $oledWindow_x + $oledWindow_w + ($oledPcb_w - $oledWindow_w) / 2 - $oledPost_r - $slidingFit_d ] ) {
+            for( cy = [ $box_di/2 + $oledWindow_y - $oledPcb_d/2 + $oledPost_r + $slidingFit_d,
+                        $box_di/2 + $oledWindow_y + $oledPcb_d/2 - $oledPost_r - $slidingFit_d ] ) {
+                translate( [ cx, cy, $box_hi - $oledLedge_h - $oledPcb_t - 2 ] ) {
+                    cylinder( r = $oledPost_r, h = $oledPcb_t + 2 );
+                }
+            }
         }
     }
 }

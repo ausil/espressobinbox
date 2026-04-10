@@ -84,6 +84,16 @@ $diskHole1_y      =  5;                         // y coordinate of the bottom-le
 
 $fanHolder_t      = 1.5;                        // thickness of the braces that constitute the fan holder
 
+$oledPcb_w        = 27;                          // OLED module PCB width (0.96" SSD1306)
+$oledPcb_d        = 27;                          // OLED module PCB depth
+$oledPcb_t        = 1.2;                         // OLED module PCB thickness
+$oledWindow_w     = 23;                          // OLED visible display area width
+$oledWindow_d     = 12;                          // OLED visible display area depth
+$oledWindow_x     = 8;                           // OLED window left edge distance from left inside wall
+$oledWindow_y     = 0;                           // OLED window center offset from box center along Y
+$oledLedge_h      = 1.5;                         // height of the support ledge the PCB rests on
+$oledPost_r       = 1.5;                         // radius of corner alignment posts
+
 $ventilation_w    = $fan_l;                     // width of the ventilation holes
 $ventilation_h    = $fan_l - 2;                 // height of the ventilation holes
 
